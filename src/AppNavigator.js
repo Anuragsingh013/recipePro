@@ -6,6 +6,7 @@ import Home from './Screens/Home';
 import Search from './Screens/Search';
 import Details from './Screens/Details';
 import Splash from './Screens/Splash';
+import RecipeByCategory from './Screens/RecipeByCategory';
 
 const Stack = createStackNavigator();
 
@@ -37,6 +38,13 @@ const AppNavigator = () => {
         <Stack.Screen
           name="Details"
           component={Details}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="RecipeBYCategory"
+          component={RecipeByCategory}
           options={{
             headerShown: false,
           }}
