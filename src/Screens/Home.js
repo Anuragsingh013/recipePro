@@ -60,7 +60,7 @@ const Home = () => {
               source={require('../images/search.png')}
               style={styles.search}
             />
-            <Text style={styles.placeholder}>Please search here...</Text>
+            <Text style={styles.placeholder}>Please Search Here...</Text>
           </AnimatedBtn>
           <Animatable.Text animation={'slideInUp'} style={styles.note}>
             Search 1000+ recipes easily with one click
@@ -145,16 +145,16 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
     position: 'absolute',
-    backgroundColor: 'rgba(0,0,0,.5)',
+    backgroundColor: 'rgba(0,0,0,.4)',
     justifyContent: 'center',
     alignItems: 'center', // Add this line
   },
   searchBox: {
     width: '90%',
-    height: 60,
+    height: 55,
     borderWidth: 1,
     backgroundColor: 'white',
-    borderRadius: 8,
+    borderRadius: 10,
     borderColor: 'white',
     flexDirection: 'row',
     alignItems: 'center',
@@ -162,8 +162,9 @@ const styles = StyleSheet.create({
     marginTop: 50,
   },
   search: {
-    width: 20,
-    height: 20,
+    width: 18,
+    height: 18,
+    tintColor: '#9e9e9e',
   },
   placeholder: {
     marginLeft: 15,
@@ -175,8 +176,8 @@ const styles = StyleSheet.create({
     color: 'white',
     position: 'absolute',
     fontWeight: '600',
-    top: 20,
-    left: 20,
+    top: 16,
+    left: 16,
   },
   note: {
     fontSize: 14,
@@ -195,14 +196,14 @@ const styles = StyleSheet.create({
   categoryItem: {
     width: 120,
     height: 120,
-    margin: 10,
+    margin: 8,
     justifyContent: 'center',
     alignItems: 'center',
   },
   card: {
     width: '80%',
     height: '70%',
-    shadowColor: 'rgba(0,0,0.3)',
+    shadowColor: 'rgba(0,0,0.4)',
     shadowOpacity: 6,
     backgroundColor: 'white',
     justifyContent: 'center',
@@ -215,7 +216,7 @@ const styles = StyleSheet.create({
     tintColor: '#05b681',
   },
   category: {
-    fontSize: 16,
+    fontSize: 14,
     fontWeight: '600',
     alignSelf: 'center',
     marginTop: 10,
@@ -223,7 +224,8 @@ const styles = StyleSheet.create({
   recipeItem: {
     width: 160,
     height: 180,
-    marginLeft: 20,
+    // marginLeft: 20,
+    marginHorizontal:12,
     borderRadius: 15,
   },
   recipeImage: {
@@ -233,7 +235,7 @@ const styles = StyleSheet.create({
   },
   recipeLabel: {
     color: 'white',
-    fontSize: 18,
+    fontSize: 16,
     width: '90%',
     fontWeight: '600',
   },

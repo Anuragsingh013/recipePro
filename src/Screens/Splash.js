@@ -14,9 +14,14 @@ const Splash = () => {
       {/* image lga dena */}
       <Animatable.Text style={styles.appName}>Recipie Pro</Animatable.Text>
       {/* <Animatable.Text animation="zoomInUp" style={styles.appName}>Recipie Pro</Animatable.Text> */}
+      {/* <Animatable.Image
+        animation={'slideInUp'}
+        source={require('../images/splashIcon.png')}
+        style={styles.banner}
+      /> */}
       <Animatable.Text animation="slideInUp" style={styles.name}>
         By Anurag
-      </Animatable.Text> 
+      </Animatable.Text>
     </View>
   );
 };
@@ -40,6 +45,11 @@ const styles = StyleSheet.create({
   },
   name: {
     fontSize: 30,
+    fontWeight: '600',
   },
-
+  // banner:{
+  //   width:50,
+  //   height:50,
+  //   marginVertical:8
+  // }
 });

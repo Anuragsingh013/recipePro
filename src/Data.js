@@ -81,7 +81,6 @@ export const DISH_FILTERS = [
 ];
 export const CUISINE_FILTERS = [
   'american',
-  'american',
   'british',
   'caribbean',
   'central europe',

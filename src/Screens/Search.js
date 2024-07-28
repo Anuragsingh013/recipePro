@@ -7,6 +7,8 @@ import {
   Image,
   StatusBar,
   FlatList,
+  Keyboard,
+  ActivityIndicator,
 } from 'react-native';
 import React, {useState} from 'react';
 import {useNavigation} from '@react-navigation/native';
@@ -26,6 +28,7 @@ const Search = () => {
   const [recipes, setRecipes] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const navigation = useNavigation();
+  const [loading, setLoading] = useState(false);
 
   const [selectedDish, setSelectedDish] = useState('');
   const [selectedCusines, setSelectedCusines] = useState('');
@@ -33,6 +36,7 @@ const Search = () => {
   const [selectedDiet, setSelectedDiet] = useState('');
 
   const searchRecipe = () => {
+    setLoading(true); // Show loader
     const requestOptions = {
       method: 'GET',
       redirect: 'follow',
@@ -65,8 +69,12 @@ const Search = () => {
       .then(result => {
         console.log(result.hits);
         setRecipes(result.hits);
+        setLoading(false); // Hide loader
       })
-      .catch(error => console.error(error));
+      .catch(error => {
+        console.error(error);
+        setLoading(false); // Hide loader
+      });
   };
 
   return (
@@ -109,35 +117,38 @@ const Search = () => {
           onPress={() => {
             setRecipes([]);
             searchRecipe();
+            Keyboard.dismiss();
           }}>
           <Text style={styles.searchTitle}>Search</Text>
         </TouchableOpacity>
       )}
-      <FlatList
-        data={recipes}
-        renderItem={({item, index}) => {
-          return (
-            <TouchableOpacity
-              style={styles.recipeItem}
-              // onPress={navigation.navigate('Details', {data: item})}
-              onPress={() => navigation.navigate('Details', {data: item})} // Corrected line
-            >
-              <Image
-                source={{uri: item.recipe.image}}
-                style={styles.itemImage}
-              />
-              <View>
-                <Text style={styles.title}>
-                  {item.recipe.label.length > 40
-                    ? item.recipe.label.substring(0, 40) + '...'
-                    : item.recipe.label}
-                </Text>
-                <Text style={styles.source}>{item.recipe.source}</Text>
-              </View>
-            </TouchableOpacity>
-          );
-        }}
-      />
+      {loading ? ( // Display loader if loading state is true
+        <ActivityIndicator style={{marginTop: 20}} />
+      ) : (
+        <FlatList
+          data={recipes}
+          renderItem={({item, index}) => {
+            return (
+              <TouchableOpacity
+                style={styles.recipeItem}
+                onPress={() => navigation.navigate('Details', {data: item})}>
+                <Image
+                  source={{uri: item.recipe.image}}
+                  style={styles.itemImage}
+                />
+                <View>
+                  <Text style={styles.title}>
+                    {item.recipe.label.length > 40
+                      ? item.recipe.label.substring(0, 40) + '...'
+                      : item.recipe.label}
+                  </Text>
+                  <Text style={styles.source}>{item.recipe.source}</Text>
+                </View>
+              </TouchableOpacity>
+            );
+          }}
+        />
+      )}
 
       {recipes && recipes.length > 0 ? (
         <TouchableOpacity
@@ -315,12 +326,12 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   backBtn: {
-    width: 50,
-    height: 50,
+    width: 40,
+    height: 40,
     backgroundColor: 'white',
     borderRadius: 25,
-    marginTop: 60,
-    marginLeft: 20,
+    marginTop: 20,
+    marginLeft: 12,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -330,21 +341,23 @@ const styles = StyleSheet.create({
   },
   searchBox: {
     width: '90%',
-    height: 50,
+    height: 45,
     borderWidth: 0.5,
     alignSelf: 'center',
-    marginTop: 50,
+    marginTop: 32,
     borderRadius: 8,
     borderColor: '#9e9e9e',
     flexDirection: 'row',
     alignItems: 'center',
+    paddingLeft: 10,
   },
   searchIcon: {
-    width: 30,
-    height: 30,
+    width: 28,
+    height: 28,
+    tintColor: '#9e9e9e',
   },
   input: {
-    width: '80%',
+    width: '78%',
     marginLeft: 10,
     fontSize: 16,
     color: 'black',
@@ -355,7 +368,7 @@ const styles = StyleSheet.create({
   },
   searchBtn: {
     width: '40%',
-    height: 50,
+    height: 40,
     backgroundColor: '#05b681',
     alignSelf: 'center',
     marginTop: 20,
@@ -369,10 +382,10 @@ const styles = StyleSheet.create({
   },
   recipeItem: {
     width: '90%',
-    height: 100,
+    height: 110,
     backgroundColor: 'white',
     alignSelf: 'center',
-    marginTop: 10,
+    marginTop: 12,
     borderRadius: 8,
     flexDirection: 'row',
     alignItems: 'center',
@@ -384,7 +397,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
   },
   title: {
-    fontSize: 20,
+    fontSize: 16,
     width: '60%',
     fontWeight: '500',
     marginLeft: 10,
@@ -398,22 +411,25 @@ const styles = StyleSheet.create({
     color: 'green',
   },
   filterBtn: {
-    width: 60,
-    height: 60,
+    width: 50,
+    height: 50,
     backgroundColor: 'white',
     shadowColor: 'rgba(0,0,0,.3)',
     shadowOpacity: 5,
     position: 'absolute',
-    bottom: 50,
+    bottom: 32,
     right: 20,
     borderRadius: 30,
     justifyContent: 'center',
     alignItems: 'center',
+    borderWidth: 0.5,
+    // borderColor:"#9e9e9e"
+    borderColor: '#05b681',
   },
   modalView: {
     width: '100%',
     // height: '50%',
-    paddingBottom: 50,
+    paddingBottom: 32,
     backgroundColor: 'white',
     position: 'absolute',
     bottom: 0,
@@ -431,11 +447,11 @@ const styles = StyleSheet.create({
   },
   modalTitle: {
     color: 'black',
-    fontSize: 18,
+    fontSize: 20,
     fontWeight: '600',
   },
   heading: {
-    fontSize: 20,
+    fontSize: 18,
     fontWeight: '800',
     marginLeft: 20,
     marginTop: 15,
@@ -446,7 +462,7 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     paddingBottom: 10,
     marginLeft: 15,
-    borderWidth: 0.6,
+    borderWidth: 0.5,
   },
   submitFilter: {
     width: '90%',
@@ -460,7 +476,7 @@ const styles = StyleSheet.create({
   },
   btnText: {
     color: 'white',
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: '600',
   },
 });

@@ -12,13 +12,14 @@ const Details = () => {
   const [selectedTab, setSelectedTab] = useState(0);
   return (
     <View style={styles.container}>
-      <Animatable.Image
+      {/* <Animatable.Image */}
+      <Image
         source={{uri: route.params.data.recipe.image}}
         style={styles.banner}
-        animation={'slideInUp'}
+        // animation={'slideInUp'}
       />
       <AnimatedBtn
-        animation={'slideInUp'}
+        // animation={'slideInUp'}
         style={styles.backBtn}
         onPress={() => {
           // navigation.navigate('Home');
@@ -29,7 +30,9 @@ const Details = () => {
       <Animatable.Text animation={'slideInUp'} style={styles.title}>
         {route.params.data.recipe.label}
       </Animatable.Text>
-      <Animatable.Text animation={'slideInUp'} style={styles.source}>
+      <Animatable.Text 
+      // animation={'slideInUp' }
+       style={styles.source}>
         {'added by ' + route.params.data.recipe.source}
       </Animatable.Text>
       <Animatable.Text animation={'slideInUp'} style={styles.calories}>
@@ -80,7 +83,7 @@ const Details = () => {
                   },
                 ]}>
                 <Animatable.Text
-                  animation={'slideInUp'}
+                  // animation={'slideInUp'}
                   style={{color: selectedTab == index ? 'white' : 'black'}}>
                   {item}
                 </Animatable.Text>
@@ -107,7 +110,9 @@ const Details = () => {
         }
         renderItem={({item, index}) => {
           return (
-            <Animatable.View animation={'slideInUp'} style={styles.labels}>
+            <Animatable.View 
+            // animation={'slideInUp'} 
+            style={styles.labels}>
               <Text>{item}</Text>
             </Animatable.View>
           );
@@ -151,7 +156,7 @@ const styles = StyleSheet.create({
   },
   source: {
     marginLeft: 20,
-    marginTop: 10,
+    marginTop: 8,
   },
   typeItem: {
     paddingLeft: 20,
@@ -170,6 +175,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     borderColor: '#9e9e9e',
     paddingLeft: 10,
+    marginBottom: 10,
   },
   calories: {
     fontSize: 16,
