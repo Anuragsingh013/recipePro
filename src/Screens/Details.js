@@ -1,3 +1,15 @@
+// import { View, Text } from 'react-native'
+// import React from 'react'
+
+// const Details = () => {
+//   return (
+//     <View>
+//       <Text>Details</Text>
+//     </View>
+//   )
+// }
+
+// export default Details
 import {View, Text, StyleSheet, FlatList} from 'react-native';
 import React, {useState} from 'react';
 import {useNavigation, useRoute} from '@react-navigation/native';

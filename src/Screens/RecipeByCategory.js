@@ -12,6 +12,8 @@ import React, {useEffect, useState} from 'react';
 // import {FlatList} from 'react-native-gesture-handler';
 import {useNavigation, useRoute} from '@react-navigation/native';
 // import {Image} from 'react-native-animatable';
+// import ContentLoader from 'react-content-loader';
+
 
 const APP_ID = 'c7ad7562';
 const APP_KEY = '21ed7defb97c9b23539d2800a8d4edc8';
@@ -118,6 +120,7 @@ export default RecipeByCategory;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    // backgroundColor:"red"
   },
   backBtn: {
     width: 40,

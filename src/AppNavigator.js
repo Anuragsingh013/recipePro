@@ -1,19 +1,37 @@
-import {View, Text} from 'react-native';
+import { View, Text } from 'react-native';
 import React from 'react';
-import {createStackNavigator} from '@react-navigation/stack';
-import {NavigationContainer} from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { NavigationContainer } from '@react-navigation/native';
 import Home from './Screens/Home';
 import Search from './Screens/Search';
 import Details from './Screens/Details';
 import Splash from './Screens/Splash';
 import RecipeByCategory from './Screens/RecipeByCategory';
+import VoiceCallPage from './Screens/VoiceCallPage';
+import Demo from './Screens/Demo';
 
 const Stack = createStackNavigator();
 
 const AppNavigator = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator
+      // initialRouteName='Demo'
+      >
+        {/* <Stack.Screen
+          name="VoiceCallPage"
+          component={VoiceCallPage}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="Demo"
+          component={Demo}
+          options={{
+            headerShown: false,
+          }}
+        /> */}
         <Stack.Screen
           name="Splash"
           component={Splash}
